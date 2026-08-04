@@ -1,0 +1,19 @@
+# BOOT-001: exact build backend for reproducible wheel/sdist builds.
+#
+# This file MUST stay byte-consistent with [build-system].requires in
+# pyproject.toml. It is not an alternative source of truth — PEP 517 isolated
+# builds read pyproject.toml and ignore this file entirely, so a mismatch here
+# would silently produce a wheel built by a different backend than the one whose
+# hashes were locked.
+#
+# Division of labour:
+#   pyproject.toml [build-system].requires  -> governs `python -m build`
+#                                              (isolated; installs from PyPI)
+#   config/requirements-build.lock          -> governs hash-verified builds
+#                                              (`--no-isolation` after
+#                                               `pip install --require-hashes`)
+#
+# tools/lock-deps.sh compiles this file, with transitive hashes, into
+# config/requirements-build.lock. tools/verify-locks.sh asserts that the exact
+# pin here is identical to the exact pin in [build-system].requires.
+hatchling==1.31.0

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dreamy — continuity console</title>
+<link rel="stylesheet" href="/static/dashboard.css">
+<!-- Inline data URI, not a file: the browser requests /favicon.ico
+     unprompted, and a 404 on every page load is noise in the console an
+     operator would otherwise have to learn to ignore. Inlining keeps the
+     zero-external-request guarantee intact. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230A0A0F'/%3E%3Cpath d='M8 3l4 5-4 5-4-5z' fill='%2300F0FF'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="chrome">
+  <div class="brand">
+    <span class="mark" aria-hidden="true">◈</span>
+    <span class="title">DREAMY</span>
+  </div>
+  <div class="chrome-status">
+    <span id="next-run" class="dim">next run: —</span>
+    <!-- Permanent, not a status that can change: it restates the contract
+         rather than reporting it. Mirrors the TUI footer (addendum C.2). -->
+    <span class="readonly" title="Analyzed repositories are never written to">
+      <span aria-hidden="true">⬤</span> REPO: READ-ONLY
+    </span>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Views">
+  <a href="#/overview"  data-view="overview">Runs</a>
+  <a href="#/findings"  data-view="findings">Findings</a>
+  <a href="#/projects"  data-view="projects">Projects</a>
+  <a href="#/prompts"   data-view="prompts">Prompts</a>
+  <a href="#/schedule"  data-view="schedule">Schedule</a>
+  <a href="#/monitor"   data-view="monitor">Monitor</a>
+</nav>
+
+<main id="main" tabindex="-1">
+  <div id="app" aria-live="polite" aria-busy="true"></div>
+</main>
+
+<footer class="chrome foot">
+  <span class="dim">read-only view · mutations live in the CLI and TUI</span>
+  <span id="poll-state" class="dim"></span>
+</footer>
+
+<script src="/static/dashboard.js" defer></script>
+</body>
+</html>

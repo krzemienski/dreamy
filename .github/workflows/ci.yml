@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dreamy with dev extras
+        run: python3 -m pip install -e ".[dev]"
+
+      - name: Lint (ruff)
+        run: ruff check src/ tests/
+
+      - name: Type check (mypy)
+        run: mypy src/dreamy
+
+      # `acceptance` gates are NOT excluded here. They skip cleanly when no
+      # corpus exists at ~/.local/share/dreamy/acceptance, which is every
+      # clean runner — excluding them would forfeit whatever hermetic checks
+      # share the marker to solve a condition CI never encounters. The
+      # local-vs-tracked mismatch (190 vs 154) only appears on a workstation
+      # that already holds another checkout's corpus; deselect the marker
+      # there, not here.
+      - name: Test (pytest)
+        run: pytest -q

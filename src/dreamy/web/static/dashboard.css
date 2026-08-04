@@ -1,0 +1,246 @@
+/* Addendum C.1 tokens. `tui/theme.py` is the authority; these are the same
+   values projected into CSS custom properties so the two surfaces cannot
+   drift apart silently. Every accent carries meaning — no colour is
+   decorative, and no state is signalled by colour alone. */
+:root {
+  --bg: #0A0A0F;
+  --surface: #12121A;
+  --border: #1F1F2E;
+  --text: #C8C8D4;
+  /* The addendum's dim token is #6A6A80, which measures 3.54:1 on --surface
+     and fails WCAG AA for body text. The TUI keeps the original value: a
+     terminal renders it against the user's own theme and font weight. A
+     browser does not, and this is where the metadata, table headers and
+     low-severity rows live — the text most likely to be read by someone
+     who needs the contrast. Lightened to 5.52:1 on --surface, still
+     unmistakably recessive against --text. */
+  --dim: #8A8AA0;
+  --cyan: #00F0FF;
+  --magenta: #FF2E97;
+  --green: #39FF14;
+  --amber: #FFB000;
+  --red: #FF3B47;
+  --purple: #A855F7;
+
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --gap: 0.75rem;
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Nothing may exceed the viewport width at any breakpoint. A dashboard that
+   scrolls sideways on a phone is broken, not responsive. */
+body { overflow-x: hidden; }
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+.skip:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+  z-index: 10;
+  background: var(--cyan);
+  color: var(--bg);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+}
+
+/* ---------- chrome ---------- */
+.chrome {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.foot {
+  border-bottom: none;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+.brand { display: flex; align-items: center; gap: 0.5rem; }
+.mark { color: var(--magenta); }
+.title { color: var(--cyan); font-weight: 700; letter-spacing: 0.18em; }
+.chrome-status { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.readonly { color: var(--green); white-space: nowrap; }
+.dim { color: var(--dim); }
+
+/* ---------- tabs ---------- */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.tabs a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+}
+.tabs a:hover { border-color: var(--border); }
+/* Active tab carries an underline as well as the accent colour, so the
+   current view is legible without colour perception. */
+.tabs a[aria-current="page"] {
+  color: var(--cyan);
+  border-color: var(--border);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+main { padding: 1rem; }
+
+/* ---------- panels ---------- */
+.grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  min-width: 0;
+}
+.card h2 {
+  margin: 0 0 0.6rem;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.card.span { grid-column: 1 / -1; }
+
+.kv { display: grid; grid-template-columns: minmax(0, 10rem) 1fr; gap: 0.2rem 1rem; }
+.kv dt { color: var(--dim); }
+.kv dd { margin: 0; overflow-wrap: anywhere; }
+
+/* ---------- state panels (C.10) ---------- */
+/* Every view renders one of these explicitly. An unspecified empty state is
+   where a dashboard looks broken rather than merely idle. */
+.state {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  text-align: center;
+}
+.state .glyph { display: block; font-size: 20px; margin-bottom: 0.4rem; }
+.state.loading { color: var(--dim); }
+.state.empty   { color: var(--dim); }
+.state.error   { color: var(--red); border-color: var(--red); }
+.state .hint { display: block; margin-top: 0.4rem; color: var(--dim); font-size: 12px; }
+
+/* ---------- tables ---------- */
+/* The table keeps its natural column widths and scrolls inside this wrapper.
+   Letting it shrink to a phone's width instead collapses long finding titles
+   into one character per line, which is unreadable — a horizontal scroll
+   inside one panel is far better than a column two characters wide. */
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 40rem; font-size: 13px; }
+th, td {
+  text-align: left;
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+th { color: var(--dim); font-weight: 500; white-space: nowrap; }
+tbody tr:hover { background: #16162099; }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* `anywhere` only as a last resort: it breaks mid-word, so it must never be
+   the primary wrap mode for prose. Normal word wrapping first. */
+td.wrap { min-width: 18rem; overflow-wrap: break-word; }
+
+/* ---------- semantic markers ---------- */
+.sev-high, .sev-critical { color: var(--red); }
+.sev-medium { color: var(--amber); }
+.sev-low { color: var(--dim); }
+
+.st-new { color: var(--cyan); }
+.st-regressed { color: var(--magenta); }
+.st-persisting { color: var(--text); }
+.st-resolved { color: var(--green); }
+.st-dismissed { color: var(--dim); }
+
+/* Provenance is never colour-only: the (D)/(A) text is the signal and the
+   purple is a redundant cue for agent inference. */
+.prov { white-space: nowrap; }
+.prov-A { color: var(--purple); }
+.prov-D { color: var(--text); }
+
+.ok { color: var(--green); }
+.warn { color: var(--amber); }
+.bad { color: var(--red); }
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: var(--gap);
+}
+label { color: var(--dim); }
+select, button {
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.3rem 0.6rem;
+}
+button { cursor: pointer; }
+button:hover { border-color: var(--cyan); color: var(--cyan); }
+
+pre {
+  margin: 0;
+  padding: 0.6rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  max-height: 22rem;
+}
+
+.log { font-size: 12px; }
+.log .lvl-WARN { color: var(--amber); }
+.log .lvl-ERROR { color: var(--red); }
+.log .lvl-INFO { color: var(--dim); }
+
+a { color: var(--cyan); }
+
+/* Single-column below the addendum's 100-column threshold, mirroring the
+   TUI's `.narrow` collapse rather than clipping side panels. */
+@media (max-width: 720px) {
+  .grid { grid-template-columns: 1fr; }
+  .kv { grid-template-columns: 1fr; }
+  .kv dt { margin-top: 0.4rem; }
+  main { padding: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

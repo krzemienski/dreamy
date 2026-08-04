@@ -1,0 +1,48 @@
+# mimirs index
+.mimirs/
+.venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+
+# build output — reproducible from source, never a committed artifact
+dist/
+build/
+*.egg-info/
+
+# agent tooling session state (never product code)
+.codegraph
+.omc/
+.campaign/
+.omo/
+.claude/
+.omp/
+.shannon/
+.crucible/
+
+# Orchestration working artifacts: plans, evidence trees, and validation runs.
+# These are the record of HOW the work was done, not the product. They also
+# carry machine-local absolute paths, so tracking them both bloats history and
+# leaks filesystem layout. Ignored at the root only (`/plans/`), so a future
+# `src/**/plans/` product directory is unaffected.
+#
+# Not hypothetical: 201 such files were committed, and the duplicate `plan.md`
+# basenames they introduced broke citation-anchor resolution — a real gate
+# failure traced back to exactly this.
+/plans/
+/evidence/
+/e2e-evidence/
+
+# agent memory-bank databases — live SQLite, machine-specific paths inside.
+# A stage-all (`git add -A`) would otherwise commit a torn WAL, which is both
+# a 2.3 MB binary in history and a disclosure of local filesystem layout.
+banks/
+.specs/scratchpad/
+
+# CI-produced artifacts
+.coverage
+htmlcov/
+omp-session*.html

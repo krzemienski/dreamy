@@ -1,0 +1,253 @@
+# Claude Code Docs & Local Python Agent SDK
+
+> LLM-friendly index of the Claude Code docs catalogue (code.claude.com/docs) plus the local Python Agent SDK skill bundle installed on this machine. The Claude Code docs page is the upstream source — this file mirrors it filtered to the Agent SDK sections and supplements with the local runnable scripts from `~/.claude/skills/python-agent-sdk`. Use this file to discover which docs page covers a topic before reading the live source.
+
+## Agent SDK — Python
+
+- [Agent SDK overview](https://code.claude.com/docs/en/agent-sdk/overview.md): Build production AI agents with Claude Code as a library. Compare the Agent SDK to the CLI, Client SDK, and Managed Agents.
+- [Quickstart](https://code.claude.com/docs/en/agent-sdk/quickstart.md): Install the Python or TypeScript SDK, set your API key, and build your first agent.
+- [Python SDK reference](https://code.claude.com/docs/en/agent-sdk/python.md): Complete API reference for the Python Agent SDK — every function, type, and class.
+- [TypeScript SDK reference](https://code.claude.com/docs/en/agent-sdk/typescript.md): Parallel reference for the TypeScript Agent SDK.
+- [Local Python SDK skill overview](file://~/.claude/skills/python-agent-sdk/SKILL.md): Decision tree for `query()` vs `ClaudeSDKClient`, installation, authentication, six core patterns.
+- [Local Python SDK API reference](file://~/.claude/skills/python-agent-sdk/references/api_reference.md): Complete signatures for `query()`, `ClaudeSDKClient`, `Tool`, `ToolDefinition`, `ToolParameter`, hooks, MCP, auth, error patterns.
+- [Local Python SDK best practices](file://~/.claude/skills/python-agent-sdk/references/best_practices.md): When to use `query()` vs `ClaudeSDKClient`, tool design, hook patterns, session security, performance, testing, common gotchas.
+
+## Agent SDK — Core Concepts
+
+- [How the agent loop works](https://code.claude.com/docs/en/agent-sdk/agent-loop.md): Message lifecycle, tool execution, context window, and SDK architecture.
+- [Use Claude Code features in the SDK](https://code.claude.com/docs/en/agent-sdk/claude-code-features.md): Load project instructions, skills, hooks, and other Claude Code features into SDK agents.
+- [Work with sessions](https://code.claude.com/docs/en/agent-sdk/sessions.md): How sessions persist agent history, and when to use continue, resume, and fork.
+- [Persist sessions to external storage](https://code.claude.com/docs/en/agent-sdk/session-storage.md): Mirror session transcripts to S3, Redis, or your own backend.
+- [Streaming input](https://code.claude.com/docs/en/agent-sdk/streaming-vs-single-mode.md): Two input modes and when to use each.
+- [Stream responses in real time](https://code.claude.com/docs/en/agent-sdk/streaming-output.md): Real-time text and tool-call streaming.
+- [Handle approvals and user input](https://code.claude.com/docs/en/agent-sdk/user-input.md): Surface Claude's approval requests and clarifying questions.
+- [Structured output](https://code.claude.com/docs/en/agent-sdk/structured-outputs.md): Return validated JSON via JSON Schema, Zod, or Pydantic.
+- [Todo Lists](https://code.claude.com/docs/en/agent-sdk/todo-tracking.md): Track and display todos from the SDK.
+
+## Agent SDK — Tools, Hooks, MCP
+
+- [Custom tools](https://code.claude.com/docs/en/agent-sdk/custom-tools.md): Define in-process MCP tools so Claude can call your functions.
+- [Local Python SDK: custom tool script](file://~/.claude/skills/python-agent-sdk/scripts/custom_tool.py): Runnable example — mortgage calculator + code validator + streaming tool.
+- [Hooks](https://code.claude.com/docs/en/agent-sdk/hooks.md): Intercept and customize agent behavior at key execution points.
+- [Local Python SDK: hooks script](file://~/.claude/skills/python-agent-sdk/scripts/hooks_example.py): Runnable example — logging, policy enforcement, session lifecycle, rate limiting.
+- [MCP integration](https://code.claude.com/docs/en/agent-sdk/mcp.md): Configure MCP servers, transport types, tool search, authentication, error handling.
+- [Local Python SDK: MCP script](file://~/.claude/skills/python-agent-sdk/scripts/mcp_integration.py): Runnable example — filesystem, GitHub, multiple servers, error handling.
+- [Tool search](https://code.claude.com/docs/en/agent-sdk/tool-search.md): Scale to thousands of tools by discovering and loading on demand.
+- [Permissions](https://code.claude.com/docs/en/agent-sdk/permissions.md): Permission modes, hooks, and declarative allow/deny rules.
+- [Subagents](https://code.claude.com/docs/en/agent-sdk/subagents.md): Define and invoke subagents to isolate context and run parallel tasks.
+- [File checkpointing](https://code.claude.com/docs/en/agent-sdk/file-checkpointing.md): Track file changes and restore to any previous state.
+- [Local Python SDK: file operations](file://~/.claude/skills/python-agent-sdk/scripts/file_operations.py): Runnable example — analyze_file, list_directory, search_in_files.
+
+## Agent SDK — Advanced
+
+- [Skills](https://code.claude.com/docs/en/agent-sdk/skills.md): Extend Claude with specialized capabilities via Agent Skills.
+- [Slash Commands](https://code.claude.com/docs/en/agent-sdk/slash-commands.md): Control Claude Code sessions through the SDK.
+- [Plugins](https://code.claude.com/docs/en/agent-sdk/plugins.md): Load plugins to extend Claude Code with skills, agents, hooks, and MCP servers.
+- [Modifying system prompts](https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts.md): `claude_code` preset vs custom prompt, CLAUDE.md, output styles.
+- [Cost and usage tracking](https://code.claude.com/docs/en/agent-sdk/cost-tracking.md): Track tokens, estimate costs, configure prompt caching.
+- [OpenTelemetry observability](https://code.claude.com/docs/en/agent-sdk/observability.md): Export traces, metrics, and events to your observability backend.
+- [Hosting and secure deployment](https://code.claude.com/docs/en/agent-sdk/hosting.md): Production deployment — subprocess architecture, scaling, multi-tenant isolation.
+- [Securely deploying AI agents](https://code.claude.com/docs/en/agent-sdk/secure-deployment.md): Isolation, credential management, network controls.
+- [Migration guide](https://code.claude.com/docs/en/agent-sdk/migration-guide.md): Migrate the Claude Code SDKs to the Claude Agent SDK.
+
+## Claude Code — Core Usage
+
+- [Overview](https://code.claude.com/docs/en/overview.md): What Claude Code is — terminal, IDE, desktop, web.
+- [Quickstart](https://code.claude.com/docs/en/quickstart.md): Welcome to Claude Code.
+- [How Claude Code works](https://code.claude.com/docs/en/how-claude-code-works.md): Agent loop, built-in tools, project interaction.
+- [Common workflows](https://code.claude.com/docs/en/common-workflows.md): Step-by-step guides for exploring codebases, bug fixes, refactoring, testing.
+- [Best practices](https://code.claude.com/docs/en/best-practices.md): Tips and patterns for productivity and parallel sessions.
+- [Interactive mode](https://code.claude.com/docs/en/interactive-mode.md): Keyboard shortcuts, input modes, interactive features.
+- [CLI reference](https://code.claude.com/docs/en/cli-reference.md): Every command and flag.
+- [Glossary](https://code.claude.com/docs/en/glossary.md): Agentic loop, compaction, CLAUDE.md, hooks, subagents, MCP.
+- [Context window](https://code.claude.com/docs/en/context-window.md): Interactive simulation of context filling during a session.
+- [Tools reference](https://code.claude.com/docs/en/tools-reference.md): All tools, permission requirements, per-tool behavior.
+
+## Claude Code — Configuration
+
+- [Setup](https://code.claude.com/docs/en/setup.md): System requirements, installation, version management.
+- [Advanced setup](https://code.claude.com/docs/en/advanced-setup.md): Platform-specific installation.
+- [Settings](https://code.claude.com/docs/en/settings.md): Global and project-level settings, environment variables.
+- [Environment variables](https://code.claude.com/docs/en/env-vars.md): Every env var that controls Claude Code behavior.
+- [Model configuration](https://code.claude.com/docs/en/model-config.md): Model aliases like `opusplan`.
+- [Permissions](https://code.claude.com/docs/en/permissions.md): Fine-grained permission rules, modes, managed policies.
+- [Permission modes](https://code.claude.com/docs/en/permission-modes.md): Cycle modes with Shift+Tab.
+- [CLAUDE.md and memory](https://code.claude.com/docs/en/memory.md): Persistent instructions, auto memory.
+- [.claude directory](https://code.claude.com/docs/en/claude-directory.md): Settings, hooks, skills, commands, subagents, workflows, rules.
+- [Debug your configuration](https://code.claude.com/docs/en/debug-your-config.md): Use /context, /doctor, /hooks, /mcp to see what loaded.
+- [Output styles](https://code.claude.com/docs/en/output-styles.md): Adapt Claude Code for uses beyond software engineering.
+- [Keybindings](https://code.claude.com/docs/en/keybindings.md): Customize keyboard shortcuts.
+- [Status line](https://code.claude.com/docs/en/statusline.md): Custom status bar for context, cost, git status.
+- [Features overview](https://code.claude.com/docs/en/features-overview.md): When to use CLAUDE.md, Skills, subagents, hooks, MCP, plugins.
+
+## Claude Code — Sessions & State
+
+- [Sessions](https://code.claude.com/docs/en/sessions.md): Name, resume, branch, switch between conversations.
+- [Checkpointing](https://code.claude.com/docs/en/checkpointing.md): Track, rewind, and summarize edits and conversation.
+- [Compaction](https://code.claude.com/docs/en/compaction.md): Manage context compaction.
+- [Goal](https://code.claude.com/docs/en/goal.md): Set a completion condition, Claude keeps working across turns.
+- [Scheduled tasks](https://code.claude.com/docs/en/scheduled-tasks.md): Run /loop and cron scheduling.
+- [Routines](https://code.claude.com/docs/en/routines.md): Autopilot — scheduled tasks triggered by API calls or GitHub events.
+- [Prompt caching](https://code.claude.com/docs/en/prompt-caching.md): How Claude Code manages prompt caching.
+
+## Claude Code — Hooks, Plugins, MCP
+
+- [Hooks reference](https://code.claude.com/docs/en/hooks.md): Hook events, configuration, JSON, exit codes, async hooks, HTTP hooks.
+- [Hooks guide](https://code.claude.com/docs/en/hooks-guide.md): Practical automation recipes.
+- [MCP](https://code.claude.com/docs/en/mcp.md): Connect Claude Code to tools via the Model Context Protocol.
+- [MCP quickstart](https://code.claude.com/docs/en/mcp-quickstart.md): Add and verify an MCP server.
+- [Managed MCP](https://code.claude.com/docs/en/managed-mcp.md): Restrict MCP servers via managed configuration.
+- [Channels](https://code.claude.com/docs/en/channels.md): Push events into a running session via MCP.
+- [Channels reference](https://code.claude.com/docs/en/channels-reference.md): Build MCP servers that push webhooks into sessions.
+- [Plugins](https://code.claude.com/docs/en/plugins.md): Create plugins to extend Claude Code.
+- [Plugins reference](https://code.claude.com/docs/en/plugins-reference.md): Complete plugin system reference.
+- [Discover plugins](https://code.claude.com/docs/en/discover-plugins.md): Find and install plugins from marketplaces.
+- [Plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces.md): Distribute plugins across teams.
+- [Plugin dependencies](https://code.claude.com/docs/en/plugin-dependencies.md): Declare version constraints.
+- [Plugin hints](https://code.claude.com/docs/en/plugin-hints.md): Emit markers from your CLI for auto-install.
+- [Plugin relevance](https://code.claude.com/docs/en/plugin-relevance.md): Suggest plugins based on user work.
+- [Skills](https://code.claude.com/docs/en/skills.md): Create, manage, and share skills.
+- [Slash commands](https://code.claude.com/docs/en/commands.md): Command reference including built-in and bundled skills.
+- [Subagents](https://code.claude.com/docs/en/sub-agents.md): Create specialized AI subagents.
+
+## Claude Code — Platforms & Integrations
+
+- [Platforms](https://code.claude.com/docs/en/platforms.md): Compare CLI, Desktop, VS Code, JetBrains, web, mobile, integrations.
+- [Desktop](https://code.claude.com/docs/en/desktop.md): Parallel sessions, drag-and-drop panes, integrated terminal, mobile dispatch.
+- [Desktop quickstart](https://code.claude.com/docs/en/desktop-quickstart.md): Install and start the desktop app.
+- [Desktop scheduled tasks](https://code.claude.com/docs/en/desktop-scheduled-tasks.md): Schedule recurring tasks in the desktop app.
+- [Desktop iOS simulator](https://code.claude.com/docs/en/desktop-ios-simulator.md): Open iOS apps in the simulator pane.
+- [Desktop Linux](https://code.claude.com/docs/en/desktop-linux.md): Install on Ubuntu/Debian.
+- [Desktop WSL](https://code.claude.com/docs/en/desktop-wsl.md): Run sessions inside WSL 2.
+- [Chrome](https://code.claude.com/docs/en/chrome.md): Connect to Chrome for web-app testing.
+- [VS Code](https://code.claude.com/docs/en/vs-code.md): Install the VS Code extension.
+- [JetBrains](https://code.claude.com/docs/en/jetbrains.md): Use with IntelliJ, PyCharm, WebStorm.
+- [Web](https://code.claude.com/docs/en/claude-code-on-the-web.md): Cloud sessions via `--cloud` and `--teleport`.
+- [Web quickstart](https://code.claude.com/docs/en/web-quickstart.md): Run Claude Code in the browser.
+- [Mobile](https://code.claude.com/docs/en/mobile.md): Start, monitor, and steer tasks from iOS/Android.
+- [Remote Control](https://code.claude.com/docs/en/remote-control.md): Continue a local session from phone/tablet/browser.
+- [Deep links](https://code.claude.com/docs/en/deep-links.md): Open Claude Code from a URL.
+- [GitHub Actions](https://code.claude.com/docs/en/github-actions.md): Integrate Claude Code into CI.
+- [GitLab CI/CD](https://code.claude.com/docs/en/gitlab-ci-cd.md): Integrate with GitLab.
+- [GitHub Enterprise Server](https://code.claude.com/docs/en/github-enterprise-server.md): Self-hosted GitHub Enterprise.
+- [Slack](https://code.claude.com/docs/en/slack.md): Delegate tasks from Slack.
+- [Cloud environments](https://code.claude.com/docs/en/cloud-environments.md): Network access, env vars, setup scripts, caching.
+- [Voice dictation](https://code.claude.com/docs/en/voice-dictation.md): Hold-to-record in the CLI.
+- [Computer use](https://code.claude.com/docs/en/computer-use.md): Open apps, click, type, see your screen.
+- [Fullscreen rendering](https://code.claude.com/docs/en/fullscreen.md): Smoother rendering with mouse support.
+
+## Claude Code — Workflows & Multi-Agent
+
+- [Agents](https://code.claude.com/docs/en/agents.md): Subagents, agent view, agent teams, dynamic workflows.
+- [Agent view](https://code.claude.com/docs/en/agent-view.md): Dispatch and manage many sessions from one screen.
+- [Agent teams](https://code.claude.com/docs/en/agent-teams.md): Coordinate multiple Claude Code instances as a team.
+- [Dynamic workflows](https://code.claude.com/docs/en/workflows.md): Orchestrate many subagents from a script Claude writes.
+- [Worktrees](https://code.claude.com/docs/en/worktrees.md): Isolate parallel sessions in separate git worktrees.
+- [Headless](https://code.claude.com/docs/en/headless.md): Run Claude Code programmatically from CLI, Python, or TypeScript.
+- [Ultraplan](https://code.claude.com/docs/en/ultraplan.md): Start a plan from the CLI, draft it on the web, execute it remotely.
+- [Ultrareview](https://code.claude.com/docs/en/ultrareview.md): Multi-agent code review in the cloud.
+- [Code Review](https://code.claude.com/docs/en/code-review.md): Automated PR reviews with multi-agent analysis.
+- [Artifacts](https://code.claude.com/docs/en/artifacts.md): Turn session output into live, interactive pages.
+- [Dev containers](https://code.claude.com/docs/en/devcontainer.md): Run inside a dev container.
+- [Large codebases](https://code.claude.com/docs/en/large-codebases.md): Configure for monorepos and large single-tree codebases.
+
+## Claude Code — Infrastructure
+
+- [Sandbox environments](https://code.claude.com/docs/en/sandbox-environments.md): Compare sandbox options.
+- [Sandboxed Bash](https://code.claude.com/docs/en/sandboxing.md): Filesystem and network isolation for safe autonomous execution.
+- [Corporate launcher](https://code.claude.com/docs/en/corporate-launcher.md): Route processes through a required launcher.
+- [Network configuration](https://code.claude.com/docs/en/network-config.md): Proxy, custom CA, mTLS.
+- [Enterprise network configuration](https://code.claude.com/docs/en/enterprise-network.md): Proxies, CA, mTLS for enterprise.
+- [LLM gateway](https://code.claude.com/docs/en/llm-gateway.md): Route through a self-hosted gateway.
+- [LLM gateway connect](https://code.claude.com/docs/en/llm-gateway-connect.md): Connect Claude Code to a gateway.
+- [LLM gateway protocol](https://code.claude.com/docs/en/llm-gateway-protocol.md): API contract.
+- [LLM gateway rollout](https://code.claude.com/docs/en/llm-gateway-rollout.md): Deploy a gateway for your organization.
+- [Other LLM gateways](https://code.claude.com/docs/en/other-llm-gateways.md): Roll out via Bedrock/Vertex/Foundry.
+- [Gateways](https://code.claude.com/docs/en/gateways.md): Route through a self-hosted gateway.
+- [Amazon Bedrock](https://code.claude.com/docs/en/amazon-bedrock.md): Configure via Bedrock.
+- [Claude Platform on AWS](https://code.claude.com/docs/en/claude-platform-on-aws.md): AWS authentication and IAM.
+- [Google Cloud Agent Platform](https://code.claude.com/docs/en/google-vertex-ai.md): Configure via Google Cloud.
+- [Microsoft Foundry](https://code.claude.com/docs/en/microsoft-foundry.md): Configure via Microsoft Foundry.
+- [Claude apps gateway](https://code.claude.com/docs/en/claude-apps-gateway.md): Self-hosted gateway with SSO, OTLP.
+- [Claude apps gateway config](https://code.claude.com/docs/en/claude-apps-gateway-config.md): Every gateway.yaml option.
+- [Claude apps gateway deploy](https://code.claude.com/docs/en/claude-apps-gateway-deploy.md): Deploy on Kubernetes/Cloud Run.
+- [Claude apps gateway on AWS](https://code.claude.com/docs/en/claude-apps-gateway-on-aws.md): ECS Fargate or EKS.
+- [Claude apps gateway on GCP](https://code.claude.com/docs/en/claude-apps-gateway-on-gcp.md): Cloud Run or GKE.
+- [Claude apps gateway spend limits](https://code.claude.com/docs/en/claude-apps-gateway-spend-limits.md): Per-developer caps.
+- [Third-party integrations](https://code.claude.com/docs/en/third-party-integrations.md): Enterprise deployment overview.
+
+## Claude Code — Enterprise & Admin
+
+- [Authentication](https://code.claude.com/docs/en/authentication.md): Log in and configure for individuals, teams, organizations.
+- [Admin setup](https://code.claude.com/docs/en/admin-setup.md): Administrator decision map.
+- [Server-managed settings](https://code.claude.com/docs/en/server-managed-settings.md): Centralized org-wide settings.
+- [Feature availability](https://code.claude.com/docs/en/feature-availability.md): Compare across plans.
+- [Monitoring](https://code.claude.com/docs/en/monitoring-usage.md): OpenTelemetry for Claude Code.
+- [Analytics](https://code.claude.com/docs/en/analytics.md): Team usage metrics, adoption, velocity.
+- [Costs](https://code.claude.com/docs/en/costs.md): Track usage, set spend limits, reduce costs.
+- [Data usage](https://code.claude.com/docs/en/data-usage.md): Anthropic data usage policies.
+- [Security](https://code.claude.com/docs/en/security.md): Safeguards and best practices.
+- [Security guidance](https://code.claude.com/docs/en/security-guidance.md): Self-review for vulnerabilities.
+- [Claude Security](https://code.claude.com/docs/en/claude-security.md): Codebase vulnerability scanning.
+- [Zero data retention](https://code.claude.com/docs/en/zero-data-retention.md): ZDR for qualified accounts.
+- [Legal and compliance](https://code.claude.com/docs/en/legal-and-compliance.md): Legal agreements and certifications.
+- [Accessibility](https://code.claude.com/docs/en/accessibility.md): Screen reader support.
+- [Internal setup](https://code.claude.com/docs/en/admin-internal-setup.md): Internal deployment.
+- [Multi-account orgs](https://code.claude.com/docs/en/multi-account-orgs.md): Multi-account org management.
+- [Troubleshooting](https://code.claude.com/docs/en/troubleshooting.md): CPU, memory, hangs, auto-compact.
+- [Troubleshoot install](https://code.claude.com/docs/en/troubleshoot-install.md): PATH, permission, network, auth errors.
+- [Errors](https://code.claude.com/docs/en/errors.md): Runtime error reference.
+- [Changelog](https://code.claude.com/docs/en/changelog.md): Release notes.
+- [Champion kit](https://code.claude.com/docs/en/champion-kit.md): Internal advocacy playbook.
+- [Communications kit](https://code.claude.com/docs/en/communications-kit.md): Launch announcements.
+
+## Claude Code — Release Notes
+
+- [What's new (index)](https://code.claude.com/docs/en/whats-new/index.md): Weekly digest.
+- [Week 13 (2026-03-23)](https://code.claude.com/docs/en/whats-new/2026-w13.md): Auto mode, computer use, PR auto-fix.
+- [Week 14 (2026-03-30)](https://code.claude.com/docs/en/whats-new/2026-w14.md): Computer use in CLI, flicker-free rendering.
+- [Week 15 (2026-04-06)](https://code.claude.com/docs/en/whats-new/2026-w15.md): Ultraplan, Monitor tool.
+- [Week 16 (2026-04-13)](https://code.claude.com/docs/en/whats-new/2026-w16.md): Claude Opus 4.7, Routines on web.
+- [Week 17 (2026-04-20)](https://code.claude.com/docs/en/whats-new/2026-w17.md): Ultrareview research preview, session recaps.
+- [Week 18 (2026-04-27)](https://code.claude.com/docs/en/whats-new/2026-w18.md): Claude Code on Windows without Git Bash.
+- [Week 19 (2026-05-04)](https://code.claude.com/docs/en/whats-new/2026-w19.md): Plugin archives, command history search.
+- [Week 20 (2026-05-11)](https://code.claude.com/docs/en/whats-new/2026-w20.md): Agent view, Goal, fast mode on Opus 4.7.
+- [Week 21 (2026-05-18)](https://code.claude.com/docs/en/whats-new/2026-w21.md): Auto mode on Pro, /usage breakdown.
+- [Week 22 (2026-05-25)](https://code.claude.com/docs/en/whats-new/2026-w22.md): Claude Opus 4.8, dynamic workflows.
+- [Week 23 (2026-06-01)](https://code.claude.com/docs/en/whats-new/2026-w23.md): Auto mode on Bedrock/Vertex/Foundry.
+- [Week 24 (2026-06-08)](https://code.claude.com/docs/en/whats-new/2026-w24.md): /cd, subagent spawn, safe mode.
+- [Week 25 (2026-06-15)](https://code.claude.com/docs/en/whats-new/2026-w25.md): Artifacts, deny/ask rules.
+- [Week 26 (2026-06-22)](https://code.claude.com/docs/en/whats-new/2026-w26.md): MCP auth, shell mode prefix.
+- [Week 27 (2026-06-29)](https://code.claude.com/docs/en/whats-new/2026-w27.md): Claude Sonnet 5 default, Chrome GA.
+- [Week 28 (2026-07-06)](https://code.claude.com/docs/en/whats-new/2026-w28.md): Built-in browser, /doctor.
+- [Week 29 (2026-07-13)](https://code.claude.com/docs/en/whats-new/2026-w29.md): MCP connectors in artifacts, screen reader mode.
+
+## Local Python SDK — Runnable Scripts
+
+- [Simple Query](file://~/.claude/skills/python-agent-sdk/scripts/simple_query.py): `query()` for one-shot prompts, with optional system prompt.
+- [Interactive Session](file://~/.claude/skills/python-agent-sdk/scripts/interactive_session.py): `ClaudeSDKClient` multi-turn, streaming, custom system prompt, session resumption.
+
+## External Code References
+
+- [Python SDK changelog](https://github.com/anthropics/claude-agent-sdk-python/blob/main/CHANGELOG.md): Python SDK release notes.
+- [Python SDK issues](https://github.com/anthropics/claude-agent-sdk-python/issues): Report bugs.
+- [TypeScript SDK changelog](https://github.com/anthropics/claude-agent-sdk-typescript/blob/main/CHANGELOG.md): TypeScript SDK release notes.
+- [TypeScript SDK issues](https://github.com/anthropics/claude-agent-sdk-typescript/issues): Report bugs.
+- [Example agents](https://github.com/anthropics/claude-agent-sdk-demos): Demo apps for local development.
+- [Anthropic Commercial Terms](https://www.anthropic.com/legal/commercial-terms): Governing terms.
+- [Anthropic sales](https://www.anthropic.com/contact-sales): Branding compliance questions.
+- [Filesystem MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem): Pre-built MCP server.
+- [GitHub MCP server](https://github.com/modelcontextprotocol/servers/tree/main/src/github): Pre-built MCP server.
+- [Anthropic API client SDKs](https://platform.claude.com/docs/en/api/client-sdks): Direct API access.
+- [Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview): Hosted REST API product.
+- [Agent harness design](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code): How Claude Code orchestrates subagents.
+
+## Optional
+
+- [Terminal config](https://code.claude.com/docs/en/terminal-config.md): Fix Shift+Enter, terminal bell, color theme, Vim mode.
+- [Rules](https://code.claude.com/docs/en/rules.md): Project-specific rules loaded automatically.
+- [Workflows](https://code.claude.com/docs/en/workflows.md): Dynamic workflows referenced above.
+- [Auto mode config](https://code.claude.com/docs/en/auto-mode-config.md): Configure the auto mode classifier.
+- [Advisor tool](https://code.claude.com/docs/en/advisor.md): Pair main model with a stronger advisor.
+- [Fast mode](https://code.claude.com/docs/en/fast-mode.md): Faster Opus responses.
+- [Prompt library](https://code.claude.com/docs/en/prompt-library.md): Copy-paste prompts.

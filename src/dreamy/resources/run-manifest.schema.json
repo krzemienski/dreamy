@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/krzemienski/dreamy/config/run-manifest.schema.json",
+  "title": "Dreamy current-run acceptance manifest",
+  "description": "Declares one run-scoped evidence directory and the artifacts it covers. The citation gate reads exactly one such run, named by an explicitly supplied manifest path. There is deliberately no directory-scan fallback and no 'latest run' auto-discovery: an empty or wrong directory yields zero anchors, zero failures, and a false PASS, so the run must be named and its contents hash-verified. Historical evidence outside the declared run is never swept.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "gate",
+    "commit",
+    "generated_utc",
+    "root",
+    "artifacts",
+    "independent_review",
+    "producer"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Manifest contract version. A validator MUST reject a version it does not know rather than guessing at the shape.",
+      "type": "integer",
+      "const": 1
+    },
+    "run_id": {
+      "description": "Unique run identifier. Must match the run directory's basename so a manifest cannot silently describe a different directory.",
+      "type": "string",
+      "pattern": "^run-[0-9]{6}-[0-9]{6}-[a-z0-9-]+$"
+    },
+    "gate": {
+      "description": "Which gate from docs/acceptance/GATE-MATRIX.md this run claims to supply evidence for. A run whose gate is BLOCKED in the matrix MUST be rejected: a gate cannot be satisfied while its own prerequisites are recorded as unmet.",
+      "type": "string",
+      "pattern": "^G[0-9]{1,2}$"
+    },
+    "requirement_ids": {
+      "description": "Requirement IDs from docs/specifications/SPEC-DREAMY-V2.md that this run supplies evidence for. Every ID MUST be defined normatively in the specification.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{3,6}-[0-9]{3}$"
+      }
+    },
+    "commit": {
+      "description": "Full git SHA the evidence was produced against.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "generated_utc": {
+      "description": "ISO-8601 UTC timestamp of manifest generation.",
+      "type": "string"
+    },
+    "root": {
+      "description": "Absolute path to the run directory. Absolute by necessity - a manifest is not committed, and the gate must resolve it on this machine. The validator MUST resolve symlinks and confirm containment under the acceptance-runs base, so a link cannot smuggle in a tree outside it. Committed documents use placeholders instead; this file is generated, never version-controlled.",
+      "type": "string",
+      "minLength": 1
+    },
+    "artifacts": {
+      "description": "Artifacts this run declares, keyed by artifact kind. Keyed rather than a list so a run cannot satisfy its contract by supplying the same document twice under different names.",
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "properties": {
+          "path": {
+            "description": "Path relative to root. MUST NOT be absolute and MUST NOT escape the run directory, so a manifest stays relocatable and cannot point at arbitrary filesystem locations.",
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?!.*\\.\\.).+$"
+          },
+          "sha256": {
+            "description": "Hex sha256 of the file's bytes. Verified at gate time; a mismatch is a hard failure, never a warning.",
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "lines": {
+            "description": "Optional line count, so a citation naming a line range can be bounds-checked without opening the file.",
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "independent_review": {
+      "description": "The reviewer verdict covering this run. A hash-verified manifest is necessary but NOT sufficient: a manifest honestly declaring one harmless file passes every integrity check and proves nothing. A run whose review reports blocking findings MUST NOT yield a green gate.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "verdict",
+        "artifact",
+        "reviewer"
+      ],
+      "properties": {
+        "verdict": {
+          "description": "PASS admits the run. PASS_WITH_MINOR admits it with non-blocking findings recorded. Every other value blocks.",
+          "type": "string",
+          "enum": [
+            "PASS",
+            "PASS_WITH_MINOR",
+            "FAIL",
+            "PARTIALLY_FIXED",
+            "NOT_FIXED",
+            "BLOCKED"
+          ]
+        },
+        "artifact": {
+          "description": "Artifact key, present in `artifacts`, holding the reviewer's machine-readable verdict.",
+          "type": "string"
+        },
+        "reviewer": {
+          "description": "Identifier of the reviewing agent or person. MUST differ from `producer`. Enforced as a declared-name inequality only: both fields are self-asserted, so this cannot prove the review was genuinely independent.",
+          "type": "string"
+        }
+      }
+    },
+    "producer": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identifier of the agent or person that PRODUCED the artifacts. Recorded so the reviewer-differs-from-producer check has something to compare against. Self-asserted; not cryptographically bound to the actual producer."
+    }
+  }
+}

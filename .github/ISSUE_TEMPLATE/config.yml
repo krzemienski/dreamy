@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Usage / setup questions
+    url: https://github.com/krzemienski/dreamy/blob/main/docs/operations/USAGE.md
+    about: Check the usage docs before filing an issue — many setup and configuration questions are answered there.
+  - name: Security vulnerability
+    url: https://github.com/krzemienski/dreamy/security/advisories/new
+    about: Do not file a public issue for a security vulnerability. Use a private security advisory instead — see SECURITY.md.

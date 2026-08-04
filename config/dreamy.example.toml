@@ -1,0 +1,117 @@
+# Dreamy example configuration [PKG-003]
+#
+# Every key below is a real field on `dreamy.config.Config`; the values shown
+# are the shipping defaults. `tests/unit/test_config_formats.py` loads THIS
+# file through the production validator, so it cannot drift from the code
+# without failing the suite.
+#
+# Copy to your config directory and edit. The write format is JSON
+# (`~/.local/share/dreamy/config.json`) — TOML is accepted on read, and
+# `dreamy --config <path>` takes either. Unknown keys are ignored, so a config
+# written for a newer build still loads on an older one.
+#
+# Secrets are NEVER read from this file. `ninerouter_api_key_env` names an
+# environment variable; the value stays in the environment [SAFE-002].
+
+# --- schedule and window -----------------------------------------------------
+
+# Seconds between scheduled runs (launchd StartInterval). 21600 = 6h.
+# Must be a positive integer: `true` and `3600.7` are rejected, because both
+# once passed a bare range check and produced a job firing every second.
+interval_seconds = 21600
+
+# How far back a run scans, in days.
+lookback_days = 30
+
+# Working directory for state.db, artifacts, and logs. `~` is expanded.
+output_dir = "~/.local/share/dreamy"
+
+# T2 correlation tolerance in seconds: a commit within this window of a
+# session may correlate to it.
+correlation_window_seconds = 30
+
+# Deleted after this many days.
+retention_days = 90
+
+# --- agent spend -------------------------------------------------------------
+
+# Per-run agent spend cap in USD. Must be positive, or omitted.
+# OMITTED MEANS AGENT ANALYSIS IS DISABLED — this is the safe default, not an
+# unlimited budget. Set it deliberately to enable paid agent work.
+# spend_cap_usd = 5.00
+
+# Soft warning threshold in USD. Warns only; never halts a run.
+# spend_warn_usd = 2.50
+
+# --- project selection -------------------------------------------------------
+
+# Empty include list means "every discovered project". A non-empty list is an
+# allowlist. Exclusions are applied after inclusions.
+include_projects = []
+exclude_projects = []
+
+# Extra files scanned for goal markers.
+goals_paths = []
+
+# --- model and routing -------------------------------------------------------
+
+agent_model = "cc/claude-opus-5"
+ninerouter_base_url = "http://localhost:20128"
+
+# Name of the environment variable holding the API key — not the key itself.
+ninerouter_api_key_env = "NINEROUTER_API_KEY"
+
+# Absolute path to the Claude CLI. Omit to resolve from PATH.
+# claude_cli_path = "/usr/local/bin/claude"
+
+# --- agent roles -------------------------------------------------------------
+
+# Only the deterministic compiler is on by default; the paid roles are opt-in.
+[agents_enabled]
+research = false
+teacher = false
+friends = false
+compiler = true
+
+# --- logging -----------------------------------------------------------------
+
+log_level = "DEBUG"
+log_topics = [
+  "ingest", "correlate", "analyze", "agent", "research",
+  "teacher", "friends", "compiler", "report", "schedule",
+]
+
+# --- artifact emission -------------------------------------------------------
+
+# "inline" embeds pinned skill bodies so two unchanged runs stay
+# byte-identical. "native" references them instead.
+emit_mode = "inline"
+
+# Pin skill bodies by SHA-256. `dreamy skills status` reports drift;
+# `dreamy skills refresh` re-pins.
+skill_pin = true
+
+# --- source overrides --------------------------------------------------------
+
+# Override a connector's discovered store path. Keys are SOURCE_IDs; omit the
+# table entirely to use auto-discovery.
+# [source_paths]
+# claude = "~/.claude/projects"
+
+# --- prompt chains -----------------------------------------------------------
+#
+# Overrides `prompt_compiler.DEFAULT_CHAINS` per artifact. A named chain
+# REPLACES that default outright (it is not appended to), while chains you do
+# not name keep their defaults. Every listed skill is resolved and pinned;
+# one that is missing on disk is reported by `dreamy skills status` as
+# `missing_on_disk` rather than failing the run.
+#
+# Defaults:
+#   resumption  = ["task-architect", "transform-validation-prompt", "goal-condition-architect"]
+#   validation  = ["functional-validation", "e2e-validate", "transform-validation-prompt"]
+#   remediation = ["create-validation-plan", "transform-validation-prompt", "no-mocking-validation-gates"]
+#   next_tasks  = ["task-architect", "ak-research-prompt"]
+#   _constraints = ["no-mocking-validation-gates", "gate-validation-discipline", "verification-before-completion"]
+#
+# [prompt_chains]
+# resumption = ["task-architect", "my-team-conventions"]

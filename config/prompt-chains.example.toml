@@ -1,0 +1,60 @@
+# Dreamy prompt-chain overrides — example [PKG-003]
+#
+# A chain names the skills the prompt compiler inlines into one artifact.
+# The shipping defaults live in `dreamy.prompt_compiler.DEFAULT_CHAINS`; this
+# file overrides them.
+#
+# This is a standalone, loadable config — pass it directly:
+#
+#     dreamy --config config/prompt-chains.example.toml skills status
+#
+# `[prompt_chains]` is also a valid table inside a full `dreamy.example.toml`,
+# so keep it separate only when you want chains version-controlled apart from
+# schedule and spend settings. Any key absent here keeps its default; there is
+# no merge conflict between the two files, because only one config path is
+# read per invocation.
+#
+# SEMANTICS
+#
+#   * A named chain REPLACES that default entirely. It is not appended to.
+#     To extend a default, restate its members and add yours.
+#   * Chains you do not name keep their defaults untouched.
+#   * Order is preserved: skills are inlined in listed order.
+#   * Duplicates across chains are pinned once.
+#   * A skill missing on disk is reported by `dreamy skills status` as
+#     `missing_on_disk`. It does not fail the run — the artifact is emitted
+#     with the skills that did resolve, and the omission is visible.
+#   * `_constraints` is not an artifact. It is the shared safety preamble
+#     applied to every chain; override it only with deliberate care.
+#
+# Verify an override before relying on it:
+#
+#     dreamy --config <this file> skills status
+#
+# Every skill listed under any chain appears in that report with its resolved
+# SHA-256 and drift state, so you can confirm the file took effect.
+
+[prompt_chains]
+
+# --- shipping defaults, restated ---------------------------------------------
+# Uncomment and edit. Restating a default is a no-op, which makes it a safe
+# starting point for a local edit.
+
+# resumption = ["task-architect", "transform-validation-prompt", "goal-condition-architect"]
+# validation = ["functional-validation", "e2e-validate", "transform-validation-prompt"]
+# remediation = ["create-validation-plan", "transform-validation-prompt", "no-mocking-validation-gates"]
+# next_tasks = ["task-architect", "ak-research-prompt"]
+
+# Shared safety preamble applied to every chain.
+# _constraints = ["no-mocking-validation-gates", "gate-validation-discipline", "verification-before-completion"]
+
+# --- example: extend a default rather than replace it ------------------------
+# The default members are restated first, then the local skill is appended.
+# Dropping the restated members would silently remove them.
+
+resumption = [
+  "task-architect",
+  "transform-validation-prompt",
+  "goal-condition-architect",
+  "my-team-conventions",
+]

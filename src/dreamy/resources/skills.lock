@@ -1,0 +1,132 @@
+{
+  "lock_version": 2,
+  "description": "Skills used by dreamy prompt chains, pinned by content hash [BOOT-002].",
+  "path_semantics": "'observed_absolute_path' records where each skill resolved on the generating machine, recorded home-relative so no username ships in the wheel. It is provenance, NOT a destination: verification resolves by search root and compares, and a mismatch is reported as an observation, never an error. Portable installation uses 'source' and 'expected_version'.",
+  "search_roots": [
+    "~/.claude/skills/<name>/SKILL.md",
+    "~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/skills/<name>/SKILL.md"
+  ],
+  "skills": [
+    {
+      "name": "ak-research-prompt",
+      "required": false,
+      "sha256": "b5e4e2eb1939e20d80ebb08af2cd03e925ed48737ecb4b131cc668382a1e7fb5",
+      "observed_absolute_path": "~/.claude/plugins/cache/agentkit-local/ak-engineer/0.2.0/skills/ak-research-prompt/SKILL.md",
+      "source_type": "plugin",
+      "source": null,
+      "expected_version": "0.2.0",
+      "plugin": "ak-engineer",
+      "marketplace": "agentkit-local",
+      "installable": false,
+      "resolution": "plugin 'ak-engineer' 0.2.0 declares no repository"
+    },
+    {
+      "name": "create-validation-plan",
+      "required": false,
+      "sha256": "d893295fcd4592e66ac5db0610b4d112b1602a0afcb019241314412e67928a50",
+      "observed_absolute_path": "~/.claude/skills/create-validation-plan/SKILL.md",
+      "source_type": "user-skills",
+      "source": null,
+      "expected_version": null,
+      "installable": false,
+      "resolution": "manual: no machine-readable origin recorded on disk"
+    },
+    {
+      "name": "e2e-validate",
+      "required": false,
+      "sha256": "12c27306d0b4f37fb1ba20e3d7e158ca443c30dfebe54eb586eaa83eebf8a1a3",
+      "observed_absolute_path": "~/.claude/skills/e2e-validate/SKILL.md",
+      "source_type": "user-skills",
+      "source": null,
+      "expected_version": null,
+      "installable": false,
+      "resolution": "manual: no machine-readable origin recorded on disk"
+    },
+    {
+      "name": "functional-validation",
+      "required": false,
+      "sha256": "c73a4e8f451fc0048414433cd2ce267b02838b24d4ef284f09be927630a76dd7",
+      "observed_absolute_path": "~/.claude/skills/functional-validation/SKILL.md",
+      "source_type": "user-skills",
+      "source": null,
+      "expected_version": null,
+      "installable": false,
+      "resolution": "manual: no machine-readable origin recorded on disk"
+    },
+    {
+      "name": "gate-validation-discipline",
+      "required": false,
+      "sha256": "fef0cecf7e0f514ec5e9d9dc4e061c6159d46879013f94ff83c1e926bcf375c8",
+      "observed_absolute_path": "~/.claude/skills/gate-validation-discipline/SKILL.md",
+      "source_type": "user-skills",
+      "source": null,
+      "expected_version": null,
+      "installable": false,
+      "resolution": "manual: no machine-readable origin recorded on disk",
+      "enhancing": true,
+      "downgraded_reason": "unobtainable on a clean machine (installable=false, source=null); compilation verified to succeed without it"
+    },
+    {
+      "name": "goal-condition-architect",
+      "required": false,
+      "sha256": "56a5a7b3f4c9dcde940b9f62efd428a6ddde8c764ae636e79b67eb4f294f4480",
+      "observed_absolute_path": "~/.claude/plugins/cache/shannon-local/shannon/1.2.0/skills/goal-condition-architect/SKILL.md",
+      "source_type": "plugin",
+      "source": "https://github.com/krzemienski/shannon",
+      "expected_version": "1.2.0",
+      "plugin": "shannon",
+      "marketplace": "shannon-local",
+      "installable": true,
+      "resolution": "install plugin shannon@1.2.0 from https://github.com/krzemienski/shannon"
+    },
+    {
+      "name": "no-mocking-validation-gates",
+      "required": false,
+      "sha256": "20f2a1225ee67a2d87ddac446fe9a76582c4b9f83a176d10cfda96cb42d79aab",
+      "observed_absolute_path": "~/.claude/skills/no-mocking-validation-gates/SKILL.md",
+      "source_type": "user-skills",
+      "source": null,
+      "expected_version": null,
+      "installable": false,
+      "resolution": "manual: no machine-readable origin recorded on disk",
+      "enhancing": true,
+      "downgraded_reason": "unobtainable on a clean machine (installable=false, source=null); compilation verified to succeed without it"
+    },
+    {
+      "name": "task-architect",
+      "required": false,
+      "sha256": "924d786b6146caf11bcc982c0d829d993c3b56f38a2cbe04c6c4607b3f8d872e",
+      "observed_absolute_path": "~/.claude/skills/task-architect/SKILL.md",
+      "source_type": "user-skills",
+      "source": null,
+      "expected_version": null,
+      "installable": false,
+      "resolution": "manual: no machine-readable origin recorded on disk"
+    },
+    {
+      "name": "transform-validation-prompt",
+      "required": false,
+      "sha256": "5bfd4f215c984023eafc24c4bd6f505e23270ce839ccc745ef86f507c44b3fa6",
+      "observed_absolute_path": "~/.claude/skills/transform-validation-prompt/SKILL.md",
+      "source_type": "user-skills",
+      "source": null,
+      "expected_version": null,
+      "installable": false,
+      "resolution": "manual: no machine-readable origin recorded on disk"
+    },
+    {
+      "name": "verification-before-completion",
+      "required": false,
+      "sha256": "72c8325428988ab769027aaea70b6ce88accd905d3487e649412f05313eaad52",
+      "observed_absolute_path": "~/.claude/skills/verification-before-completion/SKILL.md",
+      "source_type": "user-skills",
+      "source": null,
+      "expected_version": null,
+      "installable": false,
+      "resolution": "manual: no machine-readable origin recorded on disk",
+      "enhancing": true,
+      "downgraded_reason": "unobtainable on a clean machine (installable=false, source=null); compilation verified to succeed without it"
+    }
+  ],
+  "required_semantics": "'required' means dreamy CANNOT produce a correct artifact without the skill -- not that the skill is important. The three constraint skills were marked required while also carrying installable=false and source=null, which no clean machine can ever satisfy: `pip install dreamy` followed by `dreamy skills verify` failed by construction. Measured rather than assumed -- compiling a remediation artifact with ZERO of them present yields a complete 1,917-byte artifact that still names each one, because R6f degrades a missing skill to a bounded warning. They are therefore ENHANCING, not required. A skill may be marked required only when it is also obtainable (installable=true with a resolvable source)."
+}
